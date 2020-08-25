@@ -15,9 +15,16 @@ public class life : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        this.health -= 0.205f;
-        this.LifeBarImage.GetComponent<Image>().fillAmount = this.health;
-
+        print(other.name);
+        if (other.name == "Health Item" && this.health <= 0.80f)
+        {
+            this.health += 0.1035f;
+            Destroy(other.transform.gameObject, 0.5f);
+        }
+        if (other.name != "Health Item") 
+        {
+            this.health -= 0.205f;
+        }
         if (this.health <= 0)
             this.GameOverImage.SetActive(true);
     }
@@ -25,6 +32,11 @@ public class life : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        this.UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        this.LifeBarImage.GetComponent<Image>().fillAmount = this.health;
     }
 }
