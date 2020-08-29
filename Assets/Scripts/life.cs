@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class life : MonoBehaviour
+public class Life : MonoBehaviour
 {
     float health;
     public GameObject LifeBarImage;
@@ -15,11 +13,10 @@ public class life : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
         if (other.name == "Health Item" && this.health <= 0.80f)
         {
             this.health += 0.1035f;
-            Destroy(other.transform.gameObject, 0.5f);
+            Destroy(other.transform.gameObject);
         }
         if (other.name != "Health Item") 
         {
