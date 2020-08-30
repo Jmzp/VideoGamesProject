@@ -18,7 +18,7 @@ public class Life : MonoBehaviour
             this.health += 0.1035f;
             Destroy(other.transform.gameObject);
         }
-        if (other.name != "Health Item") 
+        if (other.name.Contains("Enemy")) 
         {
             this.health -= 0.205f;
         }
