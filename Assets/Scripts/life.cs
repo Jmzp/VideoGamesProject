@@ -20,7 +20,7 @@ public class Life : MonoBehaviour
         }
         if (other.name.Contains("Enemy")) 
         {
-            this.health -= 0.205f;
+            this.health -= 0.1035f;
         }
         if (this.health <= 0)
             this.GameOverImage.SetActive(true);

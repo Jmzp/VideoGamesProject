@@ -1,5 +1,4 @@
-﻿using Invector.vCharacterController;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
@@ -7,30 +6,12 @@ public class SwordAttack : MonoBehaviour
     private const string STATE_MELE_ATTACK = "MeleAttack";
     private const string STATE_NORMAL_ATTACK = "NormalAttack";
 
-    //int count;
-    //public GameObject ScoreText;
-
-    Animator animator;
+    private Animator animator;
 
     void Start()
     {
         animator = GetComponent<Animator>();
     }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.name == "Health Item")
-    //    {
-    //        print(other.name);
-    //        //other.GetComponent<AudioSource>().Play();
-    //        count++;
-    //        //this.ScoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + count;
-    //        Destroy(other.transform.parent.gameObject, 1);
-    //        print(count);
-
-    //    }
-
-    //}
 
     // Update is called once per frame
     void Update()

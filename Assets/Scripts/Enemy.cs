@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_DIE)) {
             this.isDead = true;
-            Destroy(this.gameObject, 1.2f);
         }
         else if (!isDead)
         {
