@@ -7393,10 +7393,10 @@ RectTransform:
   m_Father: {fileID: 447798236}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7521493, y: 0.91274077}
+  m_AnchorMin: {x: 0.72075015, y: 0.9148241}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000032425, y: 1.4774475}
-  m_SizeDelta: {x: -82.56604, y: 66.55536}
+  m_AnchoredPosition: {x: -0.07998657, y: 0.9774475}
+  m_SizeDelta: {x: -92.89996, y: 67.55536}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &296743379
 MonoBehaviour:
@@ -40482,7 +40482,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
-  m_isTextTruncated: 1
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -40503,10 +40503,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -11.304382, w: 0}
   m_textInfo:
     textComponent: {fileID: 1711598682}
-    characterCount: 6
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
