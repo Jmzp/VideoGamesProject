@@ -6,7 +6,9 @@ public class Enemy : MonoBehaviour
     private const string MOVE = "Move";
     private const string ATTACK = "Attack";
     private const string STATE_DIE = "Die";
-    public GameObject objective; // Player to be followed by the enemy
+    private const string STATE_ATTACK = "Attack";
+    public GameObject Objective; // Player to be followed by the enemy
+    public bool IsAttacking;
     private Vector3 initialPosition;
     private NavMeshAgent agent;
     private bool haObstacle;
@@ -20,26 +22,34 @@ public class Enemy : MonoBehaviour
         this.agent = GetComponent<NavMeshAgent>();
         this.animator = GetComponent<Animator>();
         this.isDead = false;
+        this.IsAttacking = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_ATTACK) && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            this.IsAttacking = true;
+        }
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_DIE)) {
-            this.isDead = true;
+            this.IsAttacking = false;
+            this.isDead = false;
         }
         else if (!isDead)
         {
             NavMeshHit navMeshHit;
-            this.haObstacle = NavMesh.Raycast(this.transform.position, this.objective.transform.position, out navMeshHit, NavMesh.AllAreas);
-            Debug.DrawLine(this.transform.position, this.objective.transform.position, this.haObstacle ? Color.red : Color.green);
+            this.haObstacle = NavMesh.Raycast(this.transform.position, this.Objective.transform.position, out navMeshHit, NavMesh.AllAreas);
+            Debug.DrawLine(this.transform.position, this.Objective.transform.position, this.haObstacle ? Color.red : Color.green);
 
             if (!this.haObstacle)
             {
-                float distance = Vector3.Distance(this.transform.position, this.objective.transform.position);
-                transform.LookAt(this.objective.transform);
+                float distance = Vector3.Distance(this.transform.position, this.Objective.transform.position);
+                transform.LookAt(this.Objective.transform);
                 this.agent.isStopped = false;
-                MoveTo(this.objective.transform.position);
+                MoveTo(this.Objective.transform.position);
                 this.AttackAnimation(0);
                 this.MoveAnimation(1);
                 if (distance <= 2f)

@@ -1,14 +1,21 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class LifeE : MonoBehaviour
 {
+
+    public GameObject SoreTextGameObject;
+    public ParticleSystem DeathParticle;
+    public int MaxHits;
+
     private const string DEAD = "Dead";
     private const string STATE_DIE = "Die";
+
     private Animator animator;
-    public int MaxHits;
+    private bool isShowingParticle;
     private int maxHits;
-    public GameObject SoreTextGameObject;
+    private GameObject enemy;
 
 
     // Start is called before the first frame update
@@ -16,6 +23,8 @@ public class LifeE : MonoBehaviour
     {
         this.animator = GetComponent<Animator>();
         this.maxHits = MaxHits;
+        isShowingParticle = false;
+        this.enemy = this.gameObject.GetComponent<Enemy>().Objective;
     }
 
     // Update is called once per frame
@@ -25,6 +34,7 @@ public class LifeE : MonoBehaviour
         {
             if (this.gameObject != null)
             {
+                if (!this.isShowingParticle) ShowDeathParticle();
                 Destroy(this.gameObject, 1.0f);
             }
         }
@@ -42,7 +52,12 @@ public class LifeE : MonoBehaviour
     {
         if (other.name == "PolyartSword" && this.maxHits >= 0)
         {
-            this.maxHits -= 1;
+            bool isAttacking = enemy.GetComponent<Hero>().IsAttacking;
+            if (isAttacking)
+            {
+                Debug.Log(isAttacking);
+                this.maxHits -= 1;
+            }
         }
         if (this.maxHits == 0)
         {
@@ -62,4 +77,16 @@ public class LifeE : MonoBehaviour
        this.animator.SetInteger(DEAD, 1);
     }
 
+    private void ShowDeathParticle()
+    {
+        this.isShowingParticle = true;
+        StartCoroutine(StartAndStopParticleSystem(this.DeathParticle));
+    }
+
+    IEnumerator StartAndStopParticleSystem(ParticleSystem particle)
+    {
+        particle.Play();
+        yield return new WaitForSeconds(3);
+        particle.Stop();
+    }
 }
