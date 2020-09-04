@@ -7,8 +7,11 @@ public class Enemy : MonoBehaviour
     private const string ATTACK = "Attack";
     private const string STATE_DIE = "Die";
     private const string STATE_ATTACK = "Attack";
+
     public GameObject Objective; // Player to be followed by the enemy
     public bool IsAttacking;
+    public float MinimumDistance;
+
     private Vector3 initialPosition;
     private NavMeshAgent agent;
     private bool haObstacle;
@@ -33,6 +36,10 @@ public class Enemy : MonoBehaviour
         {
             this.IsAttacking = true;
         }
+        else
+        {
+            this.IsAttacking = false;
+        }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_DIE)) {
             this.IsAttacking = false;
@@ -52,7 +59,7 @@ public class Enemy : MonoBehaviour
                 MoveTo(this.Objective.transform.position);
                 this.AttackAnimation(0);
                 this.MoveAnimation(1);
-                if (distance <= 2f)
+                if (distance <= MinimumDistance)
                 {
                     this.agent.isStopped = true;
                     this.AttackAnimation(1);

@@ -5,7 +5,8 @@ using UnityEngine;
 public class LifeE : MonoBehaviour
 {
 
-    public GameObject SoreTextGameObject;
+    public GameObject ScoreTextGameObject;
+    public GameObject EnemiesTextGameObject;
     public ParticleSystem DeathParticle;
     public int MaxHits;
 
@@ -44,7 +45,8 @@ public class LifeE : MonoBehaviour
     {
         if (this.gameObject != null)
         {
-            this.SoreTextGameObject.GetComponent<TextMeshProUGUI>().text = "Score: " + IncreaseScore();
+            IncreaseScore();
+            DecreaseEnemies();
         }
     }
 
@@ -65,12 +67,21 @@ public class LifeE : MonoBehaviour
         }
     }
 
-    private int IncreaseScore()
+    private void IncreaseScore()
     {
-        string currentValue = this.SoreTextGameObject.GetComponent<TextMeshProUGUI>().text;
+        string currentValue = this.ScoreTextGameObject.GetComponent<TextMeshProUGUI>().text;
         string [] result = currentValue.Split(' ');
-        return int.Parse(result[1]) + MaxHits;
+        this.ScoreTextGameObject.GetComponent<TextMeshProUGUI>().text = "Score: " + (int.Parse(result[1]) + MaxHits);
     } 
+
+    private void DecreaseEnemies()
+    {
+        string currentValue = this.EnemiesTextGameObject.GetComponent<TextMeshProUGUI>().text;
+        string [] values = currentValue.Split('/');
+        string total = values[1];
+        string remaining = values[0].Split(' ')[1];
+        this.EnemiesTextGameObject.GetComponent<TextMeshProUGUI>().text = "Enemies: " + (int.Parse(remaining) - 1) + "/" + total;
+    }
 
     private void DeadAnimation()
     {
