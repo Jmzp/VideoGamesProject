@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Life : MonoBehaviour
@@ -39,6 +40,7 @@ public class Life : MonoBehaviour
         {
             this.IsDead = true;
             this.GameOverImage.SetActive(true);
+            StartCoroutine(RestartGame());
         }
             
     }
@@ -69,5 +71,11 @@ public class Life : MonoBehaviour
         particle.Play();
         yield return new WaitForSeconds(3);
         particle.Stop();
+    }
+
+    IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Menu");
     }
 }
