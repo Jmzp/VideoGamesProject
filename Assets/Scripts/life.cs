@@ -18,7 +18,7 @@ public class Life : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Health Item" && this.health <= 0.80f)
+        if (other.name.Contains("Health Item") && this.health <= 0.80f)
         {
             this.health += 0.1035f;
             ShowHealthParticle();
