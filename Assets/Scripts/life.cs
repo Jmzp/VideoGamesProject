@@ -27,6 +27,7 @@ public class Life : MonoBehaviour
         if (other.tag == "Enemy") 
         {
             bool isAttacking = other.gameObject.GetComponent<Enemy>().IsAttacking;
+            print(isAttacking);
             if (isAttacking)
             {
                 ShowBlodParticle();

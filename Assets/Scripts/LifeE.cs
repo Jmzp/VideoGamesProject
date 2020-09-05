@@ -50,13 +50,14 @@ public class LifeE : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void ColliderCheck(Collider other)
     {
         if (other.name == "PolyartSword" && this.maxHits >= 0)
         {
             bool isAttacking = enemy.GetComponent<Hero>().IsAttacking;
             if (isAttacking)
             {
+                print("Ataque espada");
                 Debug.Log(isAttacking);
                 this.maxHits -= 1;
             }
@@ -65,6 +66,11 @@ public class LifeE : MonoBehaviour
         {
             DeadAnimation();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ColliderCheck(other);
     }
 
     private void IncreaseScore()
