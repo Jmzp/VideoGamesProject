@@ -24,7 +24,7 @@ public class Life : MonoBehaviour
             ShowHealthParticle();
             Destroy(other.transform.gameObject);
         }
-        if (other.name.Contains("Enemy")) 
+        if (other.tag == "Enemy") 
         {
             bool isAttacking = other.gameObject.GetComponent<Enemy>().IsAttacking;
             if (isAttacking)

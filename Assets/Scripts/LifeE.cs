@@ -22,7 +22,7 @@ public class LifeE : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.animator = GetComponent<Animator>();
+        this.animator = GetComponentInParent<Animator>();
         this.maxHits = MaxHits;
         isShowingParticle = false;
         this.enemy = this.gameObject.GetComponent<Enemy>().Objective;

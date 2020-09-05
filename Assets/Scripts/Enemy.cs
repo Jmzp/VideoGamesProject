@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         this.initialPosition = this.transform.position;
-        this.agent = GetComponent<NavMeshAgent>();
-        this.animator = GetComponent<Animator>();
+        this.agent = GetComponentInParent<NavMeshAgent>();
+        this.animator = GetComponentInParent<Animator>();
         this.isDead = false;
         this.IsAttacking = false;
     }
@@ -32,14 +32,15 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_ATTACK) && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_ATTACK))
         {
             this.IsAttacking = true;
         }
-        else
+        else if(animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_ATTACK) && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
             this.IsAttacking = false;
         }
+
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(STATE_DIE)) {
             this.IsAttacking = false;
@@ -80,12 +81,12 @@ public class Enemy : MonoBehaviour
 
     void MoveAnimation(int state)
     {
-        animator.SetInteger(MOVE, state);
+        this.animator.SetInteger(MOVE, state);
     }
 
     void AttackAnimation(int state)
     {
-        GetComponent<Animator>().SetInteger(ATTACK, state);
+        this.animator.SetInteger(ATTACK, state);
     }
 
 
